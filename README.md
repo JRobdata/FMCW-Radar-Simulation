@@ -6,7 +6,7 @@ Detects the range and radial velocity of a single target using a simulated frequ
 
 ## Features
 
-- Simulated an FMCW radar system.
+- Simulates an FMCW radar system.
 - Generates a complex baseband intermediate-frequency (IF) signal by mixing the transmitted chirps as they are sent, and the  received chirps as they are received from the moving target.
 - Adds complex Gaussian noise, and attenuation.
 - Uses fast-time FFT for range estimation.
