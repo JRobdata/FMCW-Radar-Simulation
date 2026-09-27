@@ -10,9 +10,12 @@ Tc  = 1e-6      # duration of a chirp (Seconds)
 A  = 10         # Amplitude (units)
 Tg = 1e-6       # guard time between chirps (Seconds)
 num_chirps = 100
-v = 30          # velocity of the target (m/s)
+v = 30      # velocity of the target (m/s)
 RangeMax = 200  # Theoretical range limit of radar (metres)
 R0  = 100       # initial target distance (metres)
+
+
+
 
 ###Constants
 S = B/Tc
@@ -32,6 +35,19 @@ dt = 1 / f_s              # sample spacing (Seconds)
 t = np.arange(0, Tc, dt)  # fast-time samples within each chirp
 
 std_deviation = 0.001
+
+#resolutions
+Tf = num_chirps * Tcycle #total frame time
+vmax = wavelength/(4 * Tcycle)
+vres = wavelength/(2 * Tf)
+Rangeres = c/(2 * B)
+
+
+print(f"Max velocity measurement: {vmax:.2f} m/s")
+print(f"Velocity resolution: {vres:.2f} m/s")
+print(f"Range resolution: {Rangeres:.3f} m")
+print()
+
 ##########################
 
 #Functions:
