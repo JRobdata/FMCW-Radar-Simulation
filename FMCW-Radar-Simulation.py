@@ -27,7 +27,6 @@ Taus = 2 * Ranges / c  # time taken for the chirp to reach an object and back(se
 wavelength = c / f_c                  # carrier wavelength (metres)
 alpha = 1/Ranges**2                   # attenuation
 
-
 #Nyquist-Shannon sampling theorem: sampling frequency f_s chosen to be at least 2f_max
 f_b_max = 2*S*RangeMax/c  # max beat frequency
 f_s = 2 * f_b_max 
@@ -41,7 +40,6 @@ Tf = num_chirps * Tcycle #total frame time
 vmax = wavelength/(4 * Tcycle)
 vres = wavelength/(2 * Tf)
 Rangeres = c/(2 * B)
-
 
 print(f"Max velocity measurement: {vmax:.2f} m/s")
 print(f"Velocity resolution: {vres:.2f} m/s")
@@ -59,7 +57,6 @@ def generate_if_signal(Taus, alpha, t, f_c, S, A):
     alpha_3d = alpha[:, :, None]
     Taus_3d = Taus[:, :, None]
     t_3d = t[None, None, :]
-
     IF_array_clean =  A * alpha_3d * np.exp(1j*(2*np.pi*f_c*Taus_3d + 2*np.pi* S*Taus_3d*t_3d - np.pi*S*Taus_3d**2))
     IF_array_sum_clean = np.sum(IF_array_clean, axis=0)
     
@@ -76,20 +73,14 @@ def estimate_range_velocity(IF_array_sum, dt, Tcycle, S, wavelength):
     """Estimates the target range and velocity from IF data."""
     
     hanning_window = np.hanning(IF_array_sum.shape[1])
-    IF_windowed = IF_array_sum * hanning_window[None, : ]
-    
+    IF_windowed = IF_array_sum * hanning_window[None, : ]    
     IF_fft = np.fft.fft(IF_windowed, axis=1) #fft for each chirp
     mags_per_chirp = np.abs(IF_fft)
     fft_freqs = np.fft.fftfreq(IF_array_sum.shape[1], d=dt)
-
-
     peak_indices, _ = find_peaks(x=mags_per_chirp[0], prominence=(np.max(mags_per_chirp[0]) - np.min(mags_per_chirp[0])) * 1e-6)   #Only first chirp peaks are necessary
-  
-
+     
     f_bs = fft_freqs[peak_indices]
-
     measured_ranges = c * f_bs / (2*S)    #(metres)
-
     
     slowwave = IF_fft[:, peak_indices]    # selected range bin across all chirps
     slowwave_fft = np.fft.fft(slowwave, axis=0) # slow-time FFT for Doppler estimation
@@ -113,8 +104,7 @@ def results_presentation(doppler_freqs_shift, slow_mag_shift, measured_ranges, r
     plt.plot(doppler_freqs_shift, slow_mag_shift)
     plt.xlabel("Doppler frequency (Hz)")
     plt.ylabel("FFT magnitude")
-    plt.title("Doppler Spectrum")
-    
+    plt.title("Doppler Spectrum")    
     plt.show()
     
     order = np.argsort(ranges_init)
