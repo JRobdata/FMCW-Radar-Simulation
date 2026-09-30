@@ -12,12 +12,11 @@ A  = 10         # Amplitude (units)
 Tg = 1e-6       # guard time between chirps (Seconds)
 num_chirps = 100
 std_deviation = 0.001 # for gaussian noise
+RangeMax = 200  # Theoretical range limit of radar 
 
-#velocites of the targets (m/s)
+#parameters of the targets
 velocities = np.array([30, -70, 2, 5]) #velocites of the targets (m/s)
 ranges_init = np.array ([100, 50, 90, 10 ]) #ranges of the targets (metres)
-
-RangeMax = 200  # Theoretical range limit of radar 
 
 ###Constants
 S = B/Tc
