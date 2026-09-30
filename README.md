@@ -32,7 +32,7 @@ conda install numpy matplotlib scipy
 
 ## Example Output
 
-![Doppler spectrum](doppler_spectrum.png)
+![Doppler spectrum](doppler_spectrum_multi.png)
 
 ## Notes
 
