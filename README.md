@@ -1,6 +1,6 @@
 # FMCW-Radar-Simulation
 
-Detects the range and radial velocity of a single target using a simulated frequency modulated continuous wave (FMCW) radar. 
+Detects the range and radial velocity of multiple target using a simulated frequency modulated continuous wave (FMCW) radar. 
 
 ---
 
@@ -9,8 +9,10 @@ Detects the range and radial velocity of a single target using a simulated frequ
 - Simulates an FMCW radar system.
 - Generates a complex baseband intermediate-frequency (IF) signal by mixing the transmitted chirps as they are sent, and the  received chirps as they are received from the moving target.
 - Adds complex Gaussian noise, and attenuation.
+- Includes Hann window process to prevent spectral leakage.
 - Uses fast-time FFT for range estimation.
 - Uses slow-time FFT for Doppler velocity estimation.
+- Detects target range peaks using SciPy peak detection.
 - Plots the Doppler frequency spectrum.
 
 
@@ -34,8 +36,8 @@ conda install numpy matplotlib scipy
 
 ## Notes
 
-This is a simplified model with a single target intended for exploration of FMCW radar signal processing rather than to reproduce a fully realistic radar system.
+This is a simplified model with multiple targets intended for exploration of FMCW radar signal processing rather than to reproduce a fully realistic radar system. Performance may degrade when long-range targets are detected alongside short-range ones.
 
-Further features may be implemented such as multiple target detection, angular estimation, range Doppler mapping, and animation .
+Further features may be implemented such as, angular estimation, range Doppler mapping, CFAR, and animation .
 
 
